@@ -1,4 +1,5 @@
 import time
+import collections
 from flask import Blueprint
 
 from .data.match_data import MATCHES
@@ -20,8 +21,7 @@ def match(match_id):
 
 
 def is_match(fave_numbers_1, fave_numbers_2):
-    for number in fave_numbers_2:
-        if number not in fave_numbers_1:
-            return False
-
-    return True
+    if collections.Counter(fave_numbers_2) == collections.Counter(fave_numbers_1):
+        return True
+    
+    return False
